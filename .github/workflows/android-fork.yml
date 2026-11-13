@@ -75,7 +75,11 @@ jobs:
           APK=app/build/outputs/apk/release/app-release.apk
           BT="$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)"
           "$BT/aapt2" dump badging "$APK" | grep -E "^package:|^application-label:"
-          "$BT/apksigner" verify --print-certs "$APK" | grep -E "Signer #1 certificate (DN|SHA-256)"
+          "$BT/apksigner" verify --verbose --print-certs "$APK" > ../signer.txt
+          cat ../signer.txt
+          # the repository's test key (android/app/dragonrage-test.jks, CN=Dragon Rage test builds)
+          grep -qi "certificate SHA-256 digest: 10db404f3450f5ff3e073e7926857381b372bd2efd380dc9e75bc9a9232f2757" ../signer.txt \
+            || { echo "::error::the APK is not signed with the repository's test key"; exit 1; }
           mkdir -p ../out && cp "$APK" "../out/DragonRage-teste-${DR_VERSION_NAME}-run${GITHUB_RUN_NUMBER}.apk"
 
       - uses: actions/upload-artifact@v4
