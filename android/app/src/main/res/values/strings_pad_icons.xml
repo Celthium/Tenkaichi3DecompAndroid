@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The in-game button icons (ui/screens/PadIconsSection.kt) -->
+<resources>
+    <string name="pad_icons_title">Button icons in the game</string>
+    <string name="pad_icons_text">The icons the game draws in its menus, skill list and prompts. They follow the buttons\' places: the bottom button is A on Xbox and B on Nintendo. Applied the next time the game starts.</string>
+</resources>

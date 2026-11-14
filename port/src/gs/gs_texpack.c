@@ -34,6 +34,7 @@
 #include "../../third_party/xxhash/xxhash.h"
 #include "gs_internal.h"
 #include "gs_texpack.h"
+#include "gs_padicons.h"
 
 typedef struct Entry {
     uint64_t tex, clut;
@@ -273,7 +274,7 @@ void TexPack_Init(void) {
     const char *root = getenv("BT3_TEXTURES") != NULL ? getenv("BT3_TEXTURES") : "textures";
     size_t n;
     char *dir;
-    uint32_t i, dup = 0;
+    uint32_t i, dup = 0, iconFiles;
     SDL_PathInfo info;
 #ifdef __ANDROID__
     /* SDL on Android takes a relative path as one in the app's internal folder (/data/user/0/<app>/files), not
@@ -289,21 +290,31 @@ void TexPack_Init(void) {
     n = strlen(root);
     dir = malloc(n + 2);
 
+    /* the button icons' set (gs_padicons.c) first: the first file found for a name wins, so its icons win over a pack's */
+    {
+        const char *icons = PadIcons_Dir();
+        if (icons != NULL) {
+            SDL_EnumerateDirectory(icons, walk, NULL);
+        }
+        iconFiles = sCount;
+    }
     if (root[0] == '\0' || !SDL_GetPathInfo(root, &info) || info.type != SDL_PATHTYPE_DIRECTORY) {
         fprintf(stderr, "bt3: texture pack: no folder %s\n", root);
-        free(dir);
-        return;
+    } else {
+        strcpy(dir, root);
+        if (dir[n - 1] != '/' && dir[n - 1] != '\\') {
+            strcat(dir, "/");
+        }
+        SDL_EnumerateDirectory(dir, walk, NULL);
     }
-    strcpy(dir, root);
-    if (dir[n - 1] != '/' && dir[n - 1] != '\\') {
-        strcat(dir, "/");
-    }
-    SDL_EnumerateDirectory(dir, walk, NULL);
     free(dir);
-    if (sCount == 0) {
-        /* (in the log: a pack whose files are not named as PCSX2 names them, or one switched off in the launcher) */
+    if (sCount == iconFiles) {
+        /* (in the log: a pack whose files are not named as PCSX2 names them, or one switched off in the launcher; the
+           icons' set alone is not the player's pack, and the launcher's check of the last run reads this line) */
         fprintf(stderr, "bt3: texture pack: no replacement textures (PCSX2 names) found in %s\n", root);
-        return;
+        if (sCount == 0) {
+            return;
+        }
     }
     for (sBuckets = 1024; sBuckets < sCount * 2; sBuckets *= 2) {
     }
@@ -320,7 +331,12 @@ void TexPack_Init(void) {
         }
         sBucket[h] = i + 1;
     }
-    fprintf(stderr, "bt3: texture pack: %u replacement textures in %s (%u more with a name already seen)\n", sCount - dup, root, dup);
+    if (iconFiles != 0) {
+        fprintf(stderr, "bt3: pad icons: %u pictures\n", iconFiles);
+    }
+    if (sCount > iconFiles) {
+        fprintf(stderr, "bt3: texture pack: %u replacement textures in %s (%u more with a name already seen)\n", sCount - dup, root, dup);
+    }
 }
 
 int TexPack_Count(void) {

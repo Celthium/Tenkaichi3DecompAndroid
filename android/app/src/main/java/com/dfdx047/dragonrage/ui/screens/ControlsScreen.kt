@@ -145,6 +145,8 @@ fun ControlsScreen(vm: AppViewModel) {
             StepSlider(stringResource(R.string.touch_size), { "${it * 10}%" }, (c.scale * 10).roundToInt(), 5..20) { vm.updateTouch(c.copy(scale = it / 10f)) }
         }
 
+        PadIconsSection(vm, engine) // the game's own button icons (PadIconsSection.kt)
+
         TouchProSection(c) { vm.updateTouch(it) }
 
         SectionCard(stringResource(R.string.clash_title), Icons.Rounded.Bolt, accent = Dbz.KiBlue) {

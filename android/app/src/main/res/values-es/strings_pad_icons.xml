@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pad_icons_title">Iconos de botones en el juego</string>
+    <string name="pad_icons_text">Los iconos que el juego dibuja en sus menús, la lista de técnicas y las indicaciones. Siguen la posición de los botones: el botón de abajo es A en Xbox y B en Nintendo. Se aplica la próxima vez que se inicie el juego.</string>
+</resources>

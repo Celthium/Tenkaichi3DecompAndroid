@@ -1,0 +1,18 @@
+# The game's button icons as the texture packs name them (gs_padicons.c, port/tools/pad_icons.py).
+# Found on 2026-11-14 with BT3_TEX_LOG and BT3_TEX_DUMP on the USA release (SLUS-21678): main menu, Duel, skill
+# list (all four pages), Ultimate Training. Hashes only: no picture of the game is kept here.
+# label	size	pcsx2_name	what it is (the PlayStation picture)
+cross	32x32	952388300f12d34e-55423df5023ed3cb-00005554	cross button, bottom of the four
+circle	32x32	529604a4dc3b9d3b-bdc1ecf81798c0ff-00005554	circle button, right
+square	32x32	92962b672216cd15-4ad445967828cebf-00005554	square button, left
+triangle	32x32	162e251bdea84334-44d4617110ff31ce-00005554	triangle button, top
+triangle_hold	32x32	4e0ee2ff8b0877f-156cb9cc3d4e064-00005554	triangle pressed, a yellow mark above it
+circle_prompt	64x64	1471b3fb4c510a54-46bf538779c06ffb-00005994	circle in two frames side by side (up, pressed), top half
+l2	32x32	eed0ae8a3874e777-cf1e9965a475ccb6-00005554	L2 shoulder button
+# Seen and the same for every controller (not replaced): d-pad arrows, the plus sign.
+# dpad_up	32x32	adf6f57357b9a037-df5fdcf2fe0b418a-00005554
+# dpad_down	32x32	12e152fcc3982e05-1bd7a61217ca43a8-00005554
+# dpad_left	32x32	bbb162f680c3327b-faf6f1c1dbbeb478-00005554
+# dpad_right	32x32	c1f47bf0a5022e09-87225929b0ff79c8-00005554
+# plus	32x32	54ad79beff48a616-fb175e3586f69f00-00005554
+# Not seen yet (to find the same way): L1, R1, R2, L3, R3, START, SELECT, the sticks.

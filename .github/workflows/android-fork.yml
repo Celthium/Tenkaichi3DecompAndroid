@@ -3,13 +3,13 @@
 # new build installs over the previous one. Same engine steps as android.yml; no release, no nightly, no BT4
 # (its engine is in a draft release of the upstream repository, which a fork cannot read).
 #
-# Runs on a push to a branch named fork-* (or the "Run workflow" button once this file is on the default branch).
+# Runs on a push to a branch named fork-* or feature-* (or the "Run workflow" button once this file is on the default branch).
 # The APK is the run's artifact "DragonRage-teste-<run>".
 name: android-fork
 
 on:
   push:
-    branches: ["fork-*"]
+    branches: ["fork-*", "feature-*"]
   workflow_dispatch:
 
 permissions:

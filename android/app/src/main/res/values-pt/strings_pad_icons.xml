@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pad_icons_title">Ícones dos botões no jogo</string>
+    <string name="pad_icons_text">Os ícones que o jogo desenha nos menus, na lista de golpes e nas indicações. Seguem a posição dos botões: o botão de baixo é A no Xbox e B no Nintendo. Vale na próxima vez que o jogo abrir.</string>
+</resources>
